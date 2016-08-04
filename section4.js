@@ -115,7 +115,7 @@ var section4 = function() {
 		idleTimeout = null;
 	}
 	/*Draw Text*/
-	svg.selectAll("text")
+	/*svg.selectAll("text")
 		.data(dataset)
 		.enter()
 		.append("text")
@@ -135,7 +135,8 @@ var section4 = function() {
 		})
 		.attr("font-family", "sans-serif")
 		.attr("font-size", "11px")
-		.attr("fill", "red");
+		.attr("fill", "red");*/
+	/*Draw Brush for zooming*/
 	svg.append("g")
 	    .attr("class", "brush")
 	    .call(brush);
