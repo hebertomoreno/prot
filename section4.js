@@ -25,8 +25,12 @@ var section4 = function() {
 	var dataset = [[0,0]];  						 //Initialize empty array
 	for (var i = 0; i < 1000; i++) {			 //Loop 25 times
 		//var newNumber = Math.random() * 30;  //New random number (0-30)
-		var newNumberx= Math.round(Math.random() * 500);
-		var newNumbery= Math.round(Math.random() * 500);
+		var newNumberx= (Math.random() * 10000);
+		var newNumbery= (Math.random() * 10000);
+		newNumberx += Math.random() * 10;
+		newNumberx += Math.random();
+		newNumbery += Math.random() * 10;
+		newNumberx += Math.random();
 		dataset.push([newNumberx,newNumbery]);
 	}
 	console.log(dataset);
@@ -68,7 +72,7 @@ var section4 = function() {
 			{
 				return 0;
 			} else {
-				return 5;
+				return 3;
 			}
 		});
 	/***Brush Declaration***/
