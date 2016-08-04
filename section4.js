@@ -63,6 +63,57 @@ var section4 = function() {
 				return 5;
 			}
 		});
+	/***Brush Declaration***/
+	var brush = d3.brush().on("end", brushended),
+	idleTimeout,
+	idleDelay = 350;
+	/***Brushended function***/
+	function brushended()
+	{
+		var s = d3.event.selection;
+		if (!s) {
+			if (!idleTimeout) return idleTimeout = setTimeout(idled, idleDelay);
+
+			xScale.domain(xDom);
+			yScale.domain(yDom);
+
+		} else {
+			xScale.domain([s[0][0], s[1][0]].map(xScale.invert, xScale));
+			yScale.domain([s[1][1], s[0][1]].map(yScale.invert, yScale));
+
+			svg.select(".brush").call(brush.move, null);
+		}
+		zoom();
+	}
+	function zoom()
+	{
+	    var t = svg.transition().duration(750);
+
+	    svg.select(".xaxis").transition(t).call(xAxis);
+	    svg.select(".yaxis").transition(t).call(yAxis);
+
+	    svg.selectAll("circle").transition(t)
+								.attr("class", "circles")
+								.attr("cx", function(d) {
+									return xScale(d[0]);
+								})
+								.attr("cy", function(d) {
+									return yScale(d[1]);
+								});
+		svg.selectAll("text").transition(t)
+								.attr("class", "text")
+								.attr("x",function(d) {
+									return xScale(d[0]);
+								})
+								.attr("y", function(d) {
+									return yScale(d[1]);
+								});
+	}
+	/***Idle function***/
+	function idled()
+	{
+		idleTimeout = null;
+	}
 	/*Draw Text*/
 	svg.selectAll("text")
 		.data(dataset)
@@ -85,6 +136,9 @@ var section4 = function() {
 		.attr("font-family", "sans-serif")
 		.attr("font-size", "11px")
 		.attr("fill", "red");
+	svg.append("g")
+	    .attr("class", "brush")
+	    .call(brush);
 	/*Draw Axes*/
 	svg.append("g")
 		.attr("class","xaxis")
