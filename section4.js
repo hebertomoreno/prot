@@ -22,6 +22,14 @@ var section4 = function() {
 					[25, 67],
 					[85, 21],
 					[220, 88] ];
+	/*var dataset = [];  						 //Initialize empty array
+	for (var i = 0; i < 25; i++) {			 //Loop 25 times
+		//var newNumber = Math.random() * 30;  //New random number (0-30)
+		var newNumberx= Math.round(Math.random() * 500);
+		var newNumbery= Math.round(Math.random() * 500);
+		dataset = dataset.concat("["+newNumberx+","+newNumbery"]");
+	}*/
+	console.log(dataset);
 	/*Domains*/
 	var xDom = d3.extent(dataset, function(d){
 		return d[0];
@@ -100,14 +108,6 @@ var section4 = function() {
 								.attr("cy", function(d) {
 									return yScale(d[1]);
 								});
-		svg.selectAll("text").transition(t)
-								.attr("class", "text")
-								.attr("x",function(d) {
-									return xScale(d[0]);
-								})
-								.attr("y", function(d) {
-									return yScale(d[1]);
-								});
 	}
 	/***Idle function***/
 	function idled()
@@ -145,6 +145,10 @@ var section4 = function() {
 		.attr("class","xaxis")
 		.attr("transform", "translate(0," + (h-padding) + ")")
 		.call(xAxis);
+	svg.selectAll(".xaxis text")  // select all the text elements for the xaxis
+		.attr("transform", function(d) {
+			return "translate(0," + (this.getBBox().height-7) + ")";
+		});
 	svg.append("g")
 		.attr("class", "yaxis")
 		.call(yAxis);
