@@ -1,7 +1,8 @@
 var margin = {top: 20, right: 50, bottom: 0, left: 50},
     w = 1100 - margin.left - margin.right,
     h = 400 - margin.top - margin.bottom;
-var padding = 50;
+var padding = 20;
+var radio = 10;
 
 var section4 = function() {
 	var svg = d3.select("#section1")
@@ -71,7 +72,7 @@ var section4 = function() {
 			{
 				return 0;
 			} else {
-				return 10;
+				return radio;
 			}
 		})
 		.attr("fill", function(d){
@@ -97,9 +98,11 @@ var section4 = function() {
 			xScale.domain(xDom);
 			yScale.domain(yDom);
 
+
 		} else {
 			xScale.domain([s[0][0], s[1][0]].map(xScale.invert, xScale));
 			yScale.domain([s[1][1], s[0][1]].map(yScale.invert, yScale));
+
 
 			svg.select(".brush").call(brush.move, null);
 		}
