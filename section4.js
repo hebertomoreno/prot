@@ -63,6 +63,7 @@ var section4 = function() {
 				return 5;
 			}
 		});
+	/*Draw Text*/
 	svg.selectAll("text")
 		.data(dataset)
 		.enter()
@@ -76,7 +77,7 @@ var section4 = function() {
 			}
 		})
 		.attr("x", function(d) {
-			return xScale(d[0]);
+			return xScale(d[0]+5);
 			})
 		.attr("y", function(d) {
 			return yScale(d[1]);
