@@ -33,7 +33,6 @@ var section4 = function() {
 		newNumberx += Math.random();
 		dataset.push([newNumberx,newNumbery]);
 	}
-	console.log(dataset);
 	/*Domains*/
 	var xDom = d3.extent(dataset, function(d){
 		return d[0];
@@ -72,8 +71,17 @@ var section4 = function() {
 			{
 				return 0;
 			} else {
-				return 3;
+				return 10;
 			}
+		})
+		.attr("fill", function(d){
+			var rgbR = Math.round(Math.random() * 255);
+			var rgbR = rgbR.toString(16);
+			var rgbG = Math.round(Math.random() * 255);
+			var rgbG = rgbG.toString(16);
+			var rgbB = Math.round(Math.random() * 255);
+			var rgbB = rgbG.toString(16);
+			return "#"+rgbR+rgbG+rgbB;
 		});
 	/***Brush Declaration***/
 	var brush = d3.brush().on("end", brushended),
