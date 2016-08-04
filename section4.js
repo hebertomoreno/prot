@@ -1,6 +1,6 @@
-var margin = {top: 20, right: 50, bottom: 50, left: 50},
-    w = 1000 - margin.left - margin.right,
-    h = 500 - margin.top - margin.bottom;
+var margin = {top: 20, right: 50, bottom: 0, left: 50},
+    w = 1100 - margin.left - margin.right,
+    h = 400 - margin.top - margin.bottom;
 var padding = 50;
 
 var section4 = function() {
@@ -10,7 +10,7 @@ var section4 = function() {
 				.attr("height",h + margin.top + margin.bottom)
 				.append("g")
 				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-	var dataset = [
+	/*var dataset = [
 					[0,0],
 					[5, 20],
 					[480, 90],
@@ -21,14 +21,14 @@ var section4 = function() {
 					[475, 44],
 					[25, 67],
 					[85, 21],
-					[220, 88] ];
-	/*var dataset = [];  						 //Initialize empty array
-	for (var i = 0; i < 25; i++) {			 //Loop 25 times
+					[220, 88] ];*/
+	var dataset = [[0,0]];  						 //Initialize empty array
+	for (var i = 0; i < 1000; i++) {			 //Loop 25 times
 		//var newNumber = Math.random() * 30;  //New random number (0-30)
 		var newNumberx= Math.round(Math.random() * 500);
 		var newNumbery= Math.round(Math.random() * 500);
-		dataset = dataset.concat("["+newNumberx+","+newNumbery"]");
-	}*/
+		dataset.push([newNumberx,newNumbery]);
+	}
 	console.log(dataset);
 	/*Domains*/
 	var xDom = d3.extent(dataset, function(d){
