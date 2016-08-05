@@ -74,27 +74,6 @@ var section2 = function(data) {
 	var yAxis = d3.axisLeft()
 					.scale(yScale)
 					.ticks(5);
-	/*Draw Dots*/
-	svg.selectAll("circle")
-		.data(data)
-		.enter()
-		.append("circle")
-		.attr("cx", function(d) {
-			return (xScale(d.date)+padding);
-		})
-		.attr("cy", function(d) {
-			return yScale(d.value);
-		})
-		.attr("r", 2)
-		.attr("fill", function(d){
-			var rgbR = Math.round(Math.random() * 255);
-			var rgbR = rgbR.toString(16);
-			var rgbG = Math.round(Math.random() * 255);
-			var rgbG = rgbG.toString(16);
-			var rgbB = Math.round(Math.random() * 255);
-			var rgbB = rgbG.toString(16);
-			return "#"+rgbR+rgbG+rgbB;
-		});
 	/*Draw Path*/
 	var openLine = d3.line()
 					.curve(d3.curveLinear)
@@ -108,11 +87,34 @@ var section2 = function(data) {
 		.datum(data)
 		.attr("class", "openLine")
 		.attr("d", openLine);
+
+	/*Draw Dots*/
+	svg.selectAll("circle")
+		.data(data)
+		.enter()
+		.append("circle")
+		.attr("cx", function(d) {
+			return (xScale(d.date)+padding);
+		})
+		.attr("cy", function(d) {
+			return yScale(d.value);
+		})
+		.attr("r", 4)
+		.attr("fill", function(d){
+			var rgbR = Math.round(Math.random() * 255);
+			var rgbR = rgbR.toString(16);
+			var rgbG = Math.round(Math.random() * 255);
+			var rgbG = rgbG.toString(16);
+			var rgbB = Math.round(Math.random() * 255);
+			var rgbB = rgbG.toString(16);
+			return "#"+rgbR+rgbG+rgbB;
+		});
+	
 	/*Draw Axes*/
 	console.log("Drawing Axes");
 	svg.append("g")
 		.attr("class","axis")
-		.attr("transform", "translate(0," + (h-padding) + ")")
+		.attr("transform", "translate("+padding+"," + (h-padding) + ")")
 		.call(xAxis);
 	svg.append("g")
 		.attr("class", "axis")

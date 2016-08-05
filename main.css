@@ -4,7 +4,7 @@ body {
 #section1 {
 	padding-top:50px;
 	height:500px;
-	color: #fff; 
+	color: #0000FF; 
 	background-color: #0000;
 }
 #section2 {
@@ -27,6 +27,6 @@ body {
 }
 .openLine {
   fill: none;
-  stroke: steelblue;
+  stroke: black;
   stroke-width: 1.5px;
 }
