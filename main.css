@@ -21,9 +21,9 @@ body {
 }
 #section3 {
 	padding-top:50px;
-	height:500px;
-	color: #fff; 
-	background-color: #ff9800;
+	height:700px;
+	color: #fffFF; 
+	background-color: #ccffff;
 }
 #section4 {
 	padding-top:50px;
@@ -47,4 +47,18 @@ div.tooltip {
     border: 0px;		
     border-radius: 8px;			
     pointer-events: none;			
+}
+.openLine {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+.lowLine {
+  fill: none;
+  stroke: rgba(255,0,0,0.3);
+  stroke-width: 1.5px;
+}
+.circles{
+  fill: none;
+  stroke: none;
 }
