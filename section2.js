@@ -51,6 +51,7 @@ var section2 = function(data) {
 				.attr("height", h + margin.bottom + margin.top)
 				.append("g")
 				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	
 	/*Domains*/
 	var xDom = d3.extent(data, function(d) {
 		return d.date;
@@ -74,6 +75,13 @@ var section2 = function(data) {
 	var yAxis = d3.axisLeft()
 					.scale(yScale)
 					.ticks(5);
+	/*Tip*/
+	var tip = d3.tip()
+				.attr('class', 'd3-tip')
+				.html(function(d) {
+					return "<strong>Value:</strong> <span style='color:red'>" + d.value + "</span>";
+				})
+	svg.call(tip);
 	/*Draw Path*/
 	var openLine = d3.line()
 					.curve(d3.curveLinear)
@@ -93,6 +101,7 @@ var section2 = function(data) {
 		.data(data)
 		.enter()
 		.append("circle")
+		.attr("class", "dot")
 		.attr("cx", function(d) {
 			return (xScale(d.date)+padding);
 		})
@@ -108,7 +117,9 @@ var section2 = function(data) {
 			var rgbB = Math.round(Math.random() * 255);
 			var rgbB = rgbG.toString(16);
 			return "#"+rgbR+rgbG+rgbB;
-		});
+		})
+      	.on('mouseover', tip.show)
+      	.on('mouseout', tip.hide);
 	
 	/*Draw Axes*/
 	console.log("Drawing Axes");
