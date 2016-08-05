@@ -25,6 +25,7 @@ var dataset = [
 ];
 
 var dateParser = d3.timeParse("%d/%m/%Y");
+var tFormat = d3.timeFormat("%d/%m/%y");
 
 var adjData = function(dataset) {
 	data = dataset.map(function(d) {
@@ -74,6 +75,11 @@ var section2 = function(data) {
 	var yAxis = d3.axisLeft()
 					.scale(yScale)
 					.ticks(5);
+	/*Div Tooltip*/
+	var div = d3.select("body")
+				.append("div")	
+    			.attr("class", "tooltip")				
+    			.style("opacity", 0);
 	/*Draw Path*/
 	var openLine = d3.line()
 					.curve(d3.curveLinear)
@@ -93,6 +99,7 @@ var section2 = function(data) {
 		.data(data)
 		.enter()
 		.append("circle")
+		.attr("class","dot")
 		.attr("cx", function(d) {
 			return (xScale(d.date)+padding);
 		})
@@ -108,7 +115,21 @@ var section2 = function(data) {
 			var rgbB = Math.round(Math.random() * 255);
 			var rgbB = rgbG.toString(16);
 			return "#"+rgbR+rgbG+rgbB;
-		});
+		})
+		.on("mouseover", function(d) {		
+            div.transition()		
+                .duration(200)		
+                .style("opacity", .9);		
+            div	.html(tFormat(d.date) + "<br/>"  + d.value)	
+                .style("left", (d3.event.pageX) + "px")		
+                .style("top", (d3.event.pageY - 28) + "px");	
+        })					
+        .on("mouseout", function(d) {		
+            div.transition()		
+                .duration(500)		
+                .style("opacity", 0);
+        });
+	
 	
 	/*Draw Axes*/
 	console.log("Drawing Axes");

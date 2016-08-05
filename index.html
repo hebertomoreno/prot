@@ -19,13 +19,13 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 	      			</button>
-	      			<a class="navbar-brand" href="#">WebSiteName</a>
+	      			<a class="navbar-brand" href="#">Prototipo ISCAM</a>
 				</div>
 				<div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
-							<li><a href="#section1">Section 1</a></li>
-							<li><a href="#section2">Section 2</a></li>
+							<li><a href="#section1">Gráfica con zoom</a></li>
+							<li><a href="#section2">Gráfica con tooltip</a></li>
 							<li><a href="#section3">Section 3</a></li>
 							<li><a href="#section4">Section 4</a></li>
 						</ul>
@@ -34,12 +34,23 @@
 			</div>
 		</nav>
 		<div id="section1" class="container-fluid">
-			<h1>Section 1</h1>
+			<h1>Grafica con Zoom</h1>
 			<script type="text/javascript" src="section1.js"></script>
+			<p>
+			En esta sección se muestra una gráfica de puntos que son generados 
+			dinámicamente por el programa. En total son mil puntos con valores aleatorios que van desde el 0 al diez mil. Los colores de cada punto también son aleatorios, con el propósito de que se puedan diferenciar los grupos más claramente. 
+			Los puntos pueden ser vistos a detalle dibujando el área que se desea analizar sobre la superficie de la gráfica. Esto dispara una transición que permite al usuario identificar claramente de donde viene y a donde va con respecto a la información mostrada. Cuando se escoje el área, la gráfica automáticamente ajusta los ejes para mostrar sólo los valores correspondientes a la selección. El zoom que se puede hacer es infinito. 
+			</p>
 		</div>
 		<div id="section2" class="container-fluid">
-			<h1>Section 2</h1>
+			<h1>Gráfica con tooltip</h1>
 			<script type="text/javascript" src="section2.js"></script>
+			<p>
+				La gráfica de esta sección es una gráfica de línea con los puntos importantes denotados por un tooltip que aparece cuando se pasa el mouse por encima del mismo. 
+				Puntos importantes: 
+					a) El eje x es de tipo "time", lo cual significa que trata las fechas como valores numéricos. Cualquier tipo de información de tipo fecha puede ser usada como dato para el eje o el dibujado de la gráfica. 
+					b) Los valores de fecha están arreglados de forma ascendente, de manera que no importa en qué orden estén los datos originalmente, el programa se encarga de ponerlos en su lugar correspondiente. 
+			</p>
 		</div>
 		<div id="section3" class="container-fluid">
 		<h1>Section 3</h1>
