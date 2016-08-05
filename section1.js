@@ -4,7 +4,7 @@ var margin = {top: 20, right: 50, bottom: 0, left: 50},
 var padding = 20;
 var radio = 10;
 
-var section4 = function() {
+var section1 = function() {
 	var svg = d3.select("#section1")
 				.append("svg")
 				.attr("width",w + margin.left + margin.right)
@@ -169,4 +169,4 @@ var section4 = function() {
 		.call(yAxis);
 }
 
-$(document).ready(section4);
+$(document).ready(section1);
