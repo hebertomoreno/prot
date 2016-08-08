@@ -63,3 +63,11 @@ div.tooltip {
 .x.axis path {
   display: none;
 }
+.focus circle {
+  fill: none;
+  stroke: steelblue;
+}
+.overlay {
+  fill: none;
+  pointer-events: all;
+}

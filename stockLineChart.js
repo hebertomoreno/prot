@@ -1,124 +1,100 @@
-var stockLineChart = (function (window, d3) {
+var margin = {top: 20, right: 50, bottom: 30, left: 50},
+    width = 960 - margin.left - margin.right,
+    height = 700 - margin.top - margin.bottom;
 
-	var xDom, yDom, xScale, yScale, xAxis, yAxis,svg, closeLine, chartWrapper,locator;
-	var parser = d3.timeParse("%Y-%m-%d");
-	var breakPoint = 768;
-	var data;
+var parseDate = d3.timeParse("%Y-%m-%d"),
+    bisectDate = d3.bisector(function(d) { return d.date; }).left,
+    formatValue = d3.format(",.2f"),
+    formatCurrency = function(d) { return "$" + formatValue(d); };
 
-	/*Populate the data variable with table.csv*/
-	d3.csv("table.csv", function(dataset) {
-		data = dataset.map(function(d) {
-			var parDate = parser(d.Date);
-			var f = d3.format(".2");
+var x = d3.scaleTime()
+    .range([0, width]);
 
-			d.Open = +f(+d.Open);
-			d.High = +d.High;
-			d.Low = +f(+d.Low);
-			d.Close = +d.Close;
-			d.Volume = +d.Volume;
-			d["Adj Close"] = +d["Adj Close"];
+var y = d3.scaleLinear()
+    .range([height, 0]);
 
-			return{"Date": parDate,
-			"Open": d.Open,
-			"High": d.High,
-			"Low": d.Low,
-			"Close": d.Close,
-			"Volume": d.Volume,
-			"AdjClose": d["Adj Close"]};
-		})
-		init();
-	})
-	function init() {
-		//console.log(data);
-		/*Domains*/
-		xDom = d3.extent(data, function(d) {
-			return d.Date;
-		})
-		yDom = d3.extent(data, function(d) {
-			return d.Close;
-		})
+var xAxis = d3.axisBottom()
+    .scale(x);
 
-		/*Scales*/
-		xScale = d3.scaleTime()
-					.domain(xDom);
-		yScale = d3.scaleLinear()
-					.domain(yDom);
+var yAxis = d3.axisLeft()
+    .scale(y);
 
-		/*Axes*/
-		xAxis = d3.axisBottom();
-		yAxis = d3.axisLeft();
+var closeLine = d3.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.close); });
 
-		/*Path generator for the closeLine*/
-		closeLine = d3.line()
-						.curve(d3.curveLinear)
-						.x(function(d) {
-							return xScale(d.Date);
-						})
-						.y(function(d) {
-							return yScale(d.Close);
-						});
-		/*initialize svg*/
-		svg = d3.select("#section3")
-				.append("svg");
-		chartWrapper = svg.append("g");
-		path = chartWrapper.append('path').datum(data).classed('closeLine', true);
-	    chartWrapper.append('g').classed('x axis', true);
-	    chartWrapper.append('g').classed('y axis', true);
-	    /*Locator*/
-		locator = chartWrapper.append('circle')
-							.style('display', 'none')
-							.attr('r', 10)
-							.attr('fill', '#f00');
+var svg = d3.select("#section3").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-	    /*Call render*/
-    	render();
-	}
+d3.csv("table.csv", function(error, data) {
+  if (error) throw error;
 
-	function render() {
-		//Get dimensions based on window size
-		updateDimensions(window.innerWidth);
-		xScale.range([0,width]);
-		yScale.range([height,0]);
+  data.forEach(function(d) {
+    d.date = parseDate(d.Date);
+    d.close = +d.Close;
+  });
 
-		//Update svg elements to new dimensions
-		svg
-			.attr('width', width + margin.right + margin.left)
-			.attr('height', height + margin.top + margin.bottom);
-		chartWrapper.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-		//update the axis and line
-		xAxis.scale(xScale);
-		if(window.innerWidth < breakPoint) {
-			yAxis = d3.axisRight().scale(yScale);
-			xAxis.ticks(d3.timeYear.every(2));
-		} else {
-			yAxis = d3.axisLeft().scale(yScale);
-			xAxis.ticks(d3.timeYear.every(1));
-		}
-		svg.select('.x.axis')
-			.attr('transform', 'translate(0,' + height + ')')
-			.call(xAxis);
+  data.sort(function(a, b) {
+    return a.date - b.date;
+  });
 
-		svg.select('.y.axis')
-			.call(yAxis);
+  x.domain([data[0].date, data[data.length - 1].date]);
+  y.domain(d3.extent(data, function(d) { return d.close; }));
 
-		path.attr('d', closeLine);
-	}
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
 
-	function updateDimensions(winWidth) {
-		margin.top = 20;
-		margin.right = winWidth < breakPoint ? 0 : 50;
-		margin.left = winWidth < breakPoint ? 0 : 50;
-		margin.bottom = 50;
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Price ($)");
 
-		width = winWidth - margin.left - margin.right;
-		height = .7 * width;
-		//height = 700 - margin.top - margin.bottom;
-	}
+  svg.append("path")
+      .datum(data)
+      .attr("class", "closeLine")
+      .attr("d", closeLine);
 
-	return {
-		render: render 
-	}
+  var focus = svg.append("g")
+      .attr("class", "focus")
+      .style("display", "none");
 
-})(window,d3);
+  focus.append("circle")
+      .attr("r", 4.5);
 
-window.addEventListener('resize', stockLineChart.render);
+  focus.append("text")
+      .attr("x", 9)
+      .attr("dy", ".35em");
+
+  svg.append("rect")
+      .attr("class", "overlay")
+      .attr("width", width)
+      .attr("height", height)
+      .on("mouseover", function() { focus.style("display", null); })
+      .on("mouseout", function() { focus.style("display", "none"); })
+      .on("mousemove", mousemove);
+
+  function mousemove() {
+    console.log("Mouse position is:" +d3.mouse(this)[0]);
+    var x0 = x.invert(d3.mouse(this)[0]),
+        
+        i = bisectDate(data, x0, 1),
+        
+        d0 = data[i - 1],
+        d1 = data[i],
+        d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+        console.log("x0 is "+x0);
+        console.log("i is " +i );
+    focus.attr("transform", "translate(" + x(d.date) + "," + y(d.close) + ")");
+    focus.select("text").text(formatCurrency(d.close));
+  }
+});

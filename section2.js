@@ -56,11 +56,11 @@ var section2 = function(data) {
 	var xDom = d3.extent(data, function(d) {
 		return d.date;
 	})
-	console.log(xDom);
+
 	var yDom = d3.extent(data, function(d) {
 		return d.value;
 	})
-	console.log(yDom);
+
 	/*Scales*/
 	var xScale = d3.scaleTime()
 					.domain(xDom)
@@ -132,7 +132,7 @@ var section2 = function(data) {
 	
 	
 	/*Draw Axes*/
-	console.log("Drawing Axes");
+
 	svg.append("g")
 		.attr("class","axis")
 		.attr("transform", "translate("+padding+"," + (h-padding) + ")")
