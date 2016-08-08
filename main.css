@@ -48,3 +48,17 @@ div.tooltip {
     border-radius: 8px;			
     pointer-events: none;			
 }
+.openLine {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+.lowLine {
+  fill: none;
+  stroke: rgba(255,0,0,0.3);
+  stroke-width: 1.5px;
+}
+.circles{
+  fill: none;
+  stroke: none;
+}

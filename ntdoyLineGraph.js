@@ -97,7 +97,7 @@ var makeLineGraph = function(data) {
   /***Draw Axes***/
   svg.append("g")
      .attr("class","xaxis")
-     .attr("transform", "translate(0," + h + ")")
+     .attr("transform", "translate(0," + h - padding + ")")
        .call(xAxis);
 
  svg.append("g")
