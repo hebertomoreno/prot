@@ -1,6 +1,6 @@
 var stockLineChart = (function (window, d3) {
 
-	var xDom, yDom, xScale, yScale, xAxis, yAxis,svg, closeLine, chartWrapper;
+	var xDom, yDom, xScale, yScale, xAxis, yAxis,svg, closeLine, chartWrapper,locator;
 	var parser = d3.timeParse("%Y-%m-%d");
 	var breakPoint = 768;
 	var data;
@@ -64,6 +64,11 @@ var stockLineChart = (function (window, d3) {
 		path = chartWrapper.append('path').datum(data).classed('closeLine', true);
 	    chartWrapper.append('g').classed('x axis', true);
 	    chartWrapper.append('g').classed('y axis', true);
+	    /*Locator*/
+		locator = chartWrapper.append('circle')
+							.style('display', 'none')
+							.attr('r', 10)
+							.attr('fill', '#f00');
 
 	    /*Call render*/
     	render();
@@ -84,12 +89,11 @@ var stockLineChart = (function (window, d3) {
 		xAxis.scale(xScale);
 		if(window.innerWidth < breakPoint) {
 			yAxis = d3.axisRight().scale(yScale);
+			xAxis.ticks(d3.timeYear.every(2));
 		} else {
 			yAxis = d3.axisLeft().scale(yScale);
+			xAxis.ticks(d3.timeYear.every(1));
 		}
-		/*yAxis.scale(yScale).orient(window.innerWidth < breakPoint ? 'right' : 'left');
-		yAxis.scale(yScale);*/
-
 		svg.select('.x.axis')
 			.attr('transform', 'translate(0,' + height + ')')
 			.call(xAxis);
