@@ -58,6 +58,7 @@ var stockLineChart = (function (window, d3) {
 						});
 		/*initialize svg*/
 		svg = d3.select("#section3")
+				.append("svg");
 		chartWrapper = svg.append("g");
 		path = chartWrapper.append('path').datum(data).classed('closeLine', true);
 	    chartWrapper.append('g').classed('x axis', true);
