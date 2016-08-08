@@ -1,6 +1,6 @@
 var margin = {top: 20, right: 50, bottom: 30, left: 50},
     width = 960 - margin.left - margin.right,
-    height = 700 - margin.top - margin.bottom;
+    height = 500 - margin.top - margin.bottom;
 
 var parseDate = d3.timeParse("%Y-%m-%d"),
     bisectDate = d3.bisector(function(d) { return d.date; }).left,

@@ -29,35 +29,46 @@
 						<ul class="nav navbar-nav">
 							<li><a href="#section1">Gráfica con zoom</a></li>
 							<li><a href="#section2">Gráfica con tooltip</a></li>
-							<li><a href="#section3">Section 3</a></li>
+							<li><a href="#section3">Grandes Datos</a></li>
 							<li><a href="#section4">Section 4</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</nav>
+		<div id="intro" class="container-fluid">
+			<h1>Introducción</h1>
+			<p>
+				Esta página está diseñada como una muestra de las características y herramientas a usar con d3.js, una librería de javascript para visualización de datos. 
+				Aparte, usa una interface visual basada en bootstrap, otra librería en javascript, que permite seguir el progreso del scrolling del usuario y marca la sección en la que se encuentra. 
+			</p>
+		</div>
 		<div id="section1" class="container-fluid">
 			<h1>Grafica con Zoom</h1>
-			<script type="text/javascript" src="section1.js"></script>
 			<p>
 			En esta sección se muestra una gráfica de puntos que son generados 
 			dinámicamente por el programa. En total son mil puntos con valores aleatorios que van desde el 0 al diez mil. Los colores de cada punto también son aleatorios, con el propósito de que se puedan diferenciar los grupos más claramente. 
 			Los puntos pueden ser vistos a detalle dibujando el área que se desea analizar sobre la superficie de la gráfica. Esto dispara una transición que permite al usuario identificar claramente de donde viene y a donde va con respecto a la información mostrada. Cuando se escoje el área, la gráfica automáticamente ajusta los ejes para mostrar sólo los valores correspondientes a la selección. El zoom que se puede hacer es infinito. 
 			</p>
+			<script type="text/javascript" src="section1.js"></script>
 		</div>
 		<div id="section2" class="container-fluid">
 			<h1>Gráfica con tooltip</h1>
 			<script type="text/javascript" src="section2.js"></script>
 			<p>
-				La gráfica de esta sección es una gráfica de línea con los puntos importantes denotados por un tooltip que aparece cuando se pasa el mouse por encima del mismo. 
+				La gráfica de esta sección es una gráfica de línea con los puntos de inflexión denotados por un tooltip que aparece cuando se pasa el mouse por encima del mismo. 
 				Puntos importantes: 
 					a) El eje x es de tipo "time", lo cual significa que trata las fechas como valores numéricos. Cualquier tipo de información de tipo fecha puede ser usada como dato para el eje o el dibujado de la gráfica. 
 					b) Los valores de fecha están arreglados de forma ascendente, de manera que no importa en qué orden estén los datos originalmente, el programa se encarga de ponerlos en su lugar correspondiente. 
 			</p>
 		</div>
 		<div id="section3" class="container-fluid">
-			<h1>Section 3</h1>
+			<h1>Grandes datos con información específica</h1>
 			<script type="text/javascript" src="stockLineChart.js"></script>
+			<p>
+				Esta gráfica muestra una visualización del valor de cierre de las acciones de nintendo desde que éste entró a la bolsa. Los datos van de 1997 hasta la fecha. Se obtienen de un archivo tsv descargado de Yahoo Finance. 
+				Adicionalmente, la gráfica cuenta con un tooltip como la sección anterior, pero ahora éste está dado por la posición del mouse sobre la gráfica, otorgando información más específica. 
+			</p>
 		</div>
 		<div id="section4" class="container-fluid">
 		<h1>Section 4</h1>
