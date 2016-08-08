@@ -19,12 +19,12 @@ body {
 	color: "steelblue"; 
 	background-color: #d1d1e0;
 }
-#section3 {
+/*#section3 {
 	padding-top:50px;
 	height:700px;
 	color: #fffFF; 
 	background-color: #ccffff;
-}
+}*/
 #section4 {
 	padding-top:50px;
 	height:500px;
@@ -48,17 +48,18 @@ div.tooltip {
     border-radius: 8px;			
     pointer-events: none;			
 }
-.openLine {
+.closeLine {
   fill: none;
   stroke: steelblue;
   stroke-width: 1.5px;
 }
-.lowLine {
+.axis path,
+.axis line {
   fill: none;
-  stroke: rgba(255,0,0,0.3);
-  stroke-width: 1.5px;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
-.circles{
-  fill: none;
-  stroke: none;
+
+.x.axis path {
+  display: none;
 }
