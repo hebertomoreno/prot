@@ -2,6 +2,7 @@ var stockLineChart = (function (window, d3) {
 
 	var xDom, yDom, xScale, yScale, xAxis, yAxis,svg, closeLine, chartWrapper;
 	var parser = d3.timeParse("%Y-%m-%d");
+	var breakPoint = 768;
 	var data;
 
 	/*Populate the data variable with table.csv*/
@@ -81,7 +82,13 @@ var stockLineChart = (function (window, d3) {
 		chartWrapper.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 		//update the axis and line
 		xAxis.scale(xScale);
-		yAxis.scale(yScale);
+		if(window.innerWidth < breakPoint) {
+			yAxis = d3.axisRight().scale(yScale);
+		} else {
+			yAxis = d3.axisLeft().scale(yScale);
+		}
+		/*yAxis.scale(yScale).orient(window.innerWidth < breakPoint ? 'right' : 'left');
+		yAxis.scale(yScale);*/
 
 		svg.select('.x.axis')
 			.attr('transform', 'translate(0,' + height + ')')
@@ -95,12 +102,13 @@ var stockLineChart = (function (window, d3) {
 
 	function updateDimensions(winWidth) {
 		margin.top = 20;
-		margin.right = 50;
-		margin.left = 50;
+		margin.right = winWidth < breakPoint ? 0 : 50;
+		margin.left = winWidth < breakPoint ? 0 : 50;
 		margin.bottom = 50;
 
 		width = winWidth - margin.left - margin.right;
-		height = 700 - margin.top - margin.bottom;
+		height = .7 * width;
+		//height = 700 - margin.top - margin.bottom;
 	}
 
 	return {
@@ -108,3 +116,5 @@ var stockLineChart = (function (window, d3) {
 	}
 
 })(window,d3);
+
+window.addEventListener('resize', stockLineChart.render);
