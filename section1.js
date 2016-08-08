@@ -116,7 +116,7 @@ var section1 = function() {
 	    svg.select(".yaxis").transition(t).call(yAxis);
 
 	    svg.selectAll("circle").transition(t)
-								.attr("class", "circles")
+								.attr("class", "circle")
 								.attr("cx", function(d) {
 									return xScale(d[0]);
 								})
