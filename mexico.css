@@ -1,0 +1,48 @@
+.mesh {
+			fill: none;
+			stroke: #fff;
+			stroke-linecap: round;
+			stroke-linejoin: round;
+		}
+		.state {
+			fill: #ccc;
+			cursor: pointer;
+		}
+		.state:hover {
+			fill: yellow;
+		}
+		.stateLabel {
+			font-size: 4px;
+			font-family: sans-serif;
+		}
+		.stateLabel.id09{
+			font-size: 1px;
+		}
+		.stateLabel.id15 {
+			font-size: 2px;
+		}
+		.stateLabel.id17 {
+			font-size: 2px;
+		}
+		.stateLabel.id29 {
+			font-size: 2px;
+		}
+		.stateLabel.id13 {
+			font-size: 2px;
+		}
+		.stateLabel.id22 {
+			font-size: 2px;
+		}
+		.stateLabel.id11 {
+			font-size: 2px;
+		}
+		.stateLabel.id01 {
+			font-size: 2px;
+		}
+		.background {
+			fill: none;
+			pointer-events: all;
+		}
+		.state.active {
+			fill: orange;
+		}
