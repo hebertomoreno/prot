@@ -1,3 +1,4 @@
+@import url("mexico.css");
 body {
 	position: relative;
 }
@@ -18,25 +19,25 @@ p {
 }
 #section1 {
 	padding-top:50px;
-	height:700px;
+	height:800px;
 	color: #0000FF; 
 	background-color: #0000;
 }
 #section2 {
 	padding-top:50px;
-	height:700px;
+	height:800px;
 	color: "steelblue"; 
 	background-color: #d1d1e0;
 }
 #section3 {
 	padding-top:50px;
-	height:700px;
+	height:800px;
 	color: #fffFF; 
 	background-color: #ccffff;
 }
 #section4 {
 	padding-top:50px;
-	height:500px;
+	height:800px;
 	color: #fff; 
 	background-color: #00bcd4;
 }
